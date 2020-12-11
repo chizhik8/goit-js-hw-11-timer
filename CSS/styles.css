@@ -1,0 +1,28 @@
+body {
+  background: #eee;
+}
+
+.timer {
+  text-align: center;
+  justify-content: space-between;
+  perspective: 600px;
+  margin: 0px;
+}
+
+.field {
+  display: inline-block;
+  margin: 5px;
+}
+
+.label {
+  font-size: 30px;
+  line-height: 0.95;
+  display: block;
+}
+
+.value {
+  display: block;
+  font-size: 35px;
+  line-height: 0.95;
+  background-color: #fff;
+}
