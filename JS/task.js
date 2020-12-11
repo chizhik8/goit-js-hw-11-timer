@@ -1,25 +1,23 @@
-new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date('Dec 17, 2020'),
-});
+class CountdownTimer {
 
-function CountdownTimer(timer) {
-  this.selectorRef = document.querySelector(timer.selector);
-  this.targetDate = timer.targetDate;
-  this.daysRef = this.selectorRef.children[0].children[0];
-  this.hoursRef = this.selectorRef.children[1].children[0];
-  this.minsRef = this.selectorRef.children[2].children[0];
-  this.secsRef = this.selectorRef.children[3].children[0];
-  this.currentDate = Date.now();
-  this.days = 0;
-  this.hours = 0;
-  this.mins = 0;
-  this.secs = 0;
-  this.deltaTime = 0;
+  constructor (timer) {
+    this.selectorRef = document.querySelector(timer.selector);
+    this.targetDate = timer.targetDate;
+    this.daysRef = this.selectorRef.querySelector('[data-value="days"]');
+    this.hoursRef = this.selectorRef.querySelector('[data-value="hours"]');
+    this.minsRef = this.selectorRef.querySelector('[data-value="mins"]');
+    this.secsRef = this.selectorRef.querySelector('[data-value="secs"]');
+    this.currentDate = Date.now();
+    this.days = 0;
+    this.hours = 0;
+    this.mins = 0;
+    this.secs = 0;
+    this.deltaTime = 0;
+  }
 
-  this.pad = function (value) { return String(value).padStart(2, '0'); };
+  pad (value) { return String(value).padStart(2, '0'); }
   
-  this.updateTimer = function(time) {
+  updateTimer (time) {
     this.days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
     this.hours = this.pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
     this.mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
@@ -28,9 +26,9 @@ function CountdownTimer(timer) {
     this.hoursRef.textContent = this.hours;
     this.minsRef.textContent = this.mins;
     this.secsRef.textContent = this.secs;
-  };    
+  }   
     
-  this.interval = setInterval(() => {
+  interval = setInterval(() => {
       const currentDate = Date.now()
     this.deltaTime = this.targetDate.getTime() - currentDate;
     if (this.deltaTime <= 0) {
@@ -42,6 +40,18 @@ function CountdownTimer(timer) {
       return;
     };
       this.updateTimer(this.deltaTime);
-  }, 1000);
+  }, 1000)
+
+ 
 
 }
+
+const timerFirst = new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('Dec 15, 2020'),
+});
+
+const timerSecond = new CountdownTimer({
+  selector: '#timer-2',
+  targetDate: new Date('Dec 13, 2020'),
+});
